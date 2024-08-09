@@ -11,8 +11,7 @@ import jakarta.persistence.Table;
 @Table(name = "User")
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userId;
+	private String userId;
 	@Column(nullable = false, length = 50)
 	private String fullName;
 	@Column(nullable = false, unique = true, length = 50)
@@ -21,10 +20,10 @@ public class User {
 	private String contact_Number;
 	@Column(nullable = false, length = 50)
 	private String password;
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getFullName() {
@@ -57,6 +56,10 @@ public class User {
 		this.contact_Number = contact_Number;
 		this.password = password;
 	}
+	public User() {
+		super();
+	}
+	
 //	public User(String email, String password) {
 //		this.email = email;
 //		this.password = password;

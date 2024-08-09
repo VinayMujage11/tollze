@@ -1,28 +1,30 @@
 package com.tollze.controllers;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tollze.entities.LoginCredentials;
-import com.tollze.entities.User;
-import com.tollze.repositories.UserRepository;
+import com.tollze.entities.AdminDetails;
+import com.tollze.entities.AdminLoginCredentials;
+import com.tollze.repositories.AdminDetailsRepository;
+
 @RestController
-public class LoginController {
+public class AdminLoginController {
 	@Autowired
-	public UserRepository userRepository;
+	public AdminDetailsRepository admindetailsrepo;
 	@CrossOrigin(origins = "http://localhost:3000")
-	@PostMapping("/Login")
-	public User loginUser(@RequestBody LoginCredentials lc1) 
+	@PostMapping("/AdminLogin")
+	public AdminDetails loginUser(@RequestBody AdminLoginCredentials lc1) 
 	{
 		try{
-			User user = userRepository.findByEmail(lc1.getEmail());
-			String passuser = user.getPassword();
+			AdminDetails admin = admindetailsrepo.findByadminId(lc1.getAdminId());
+			String passadmin = admin.getPassword();
 			String passlc1 = lc1.getPassword();
-			if(passuser.equals(passlc1))
+			if(passadmin.equals(passlc1))
 			{
-				return user;
+				return admin;
 			}
 			else {
 				return null;
@@ -32,4 +34,5 @@ public class LoginController {
 			return null;
 		}
 	}
+
 }

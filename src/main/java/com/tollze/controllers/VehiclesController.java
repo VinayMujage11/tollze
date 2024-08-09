@@ -1,27 +1,26 @@
 package com.tollze.controllers;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-//import org.springframework.web.bind.annotation.*;
 
-
+import com.tollze.entities.LoginCredentials;
 import com.tollze.entities.User;
+import com.tollze.entities.VehicleDetailsAsPerUser;
 import com.tollze.repositories.UserRepository;
+import com.tollze.repositories.VehiclesAsPerUserRepository;
 
 @RestController
-public class RegisterController {
+public class VehiclesController {
 	@Autowired
-	public UserRepository userRepository;
-	
+	public VehiclesAsPerUserRepository vehiclesasperuserrepo ;
 	@CrossOrigin(origins = "http://localhost:3000")
-	@PostMapping("/AddUser")
-	public void addUser(@RequestBody User user) {
-		int count= (int) (Math.random() * 100000);
-		String s = "UZ-er" + count;
-		user.setUserId(s);
-		
-		userRepository.save(user);
+	@PostMapping("/AddVehicle")
+	public void addVehicle(@RequestBody VehicleDetailsAsPerUser v) {
+		System.out.println(v);
+		vehiclesasperuserrepo.save(v);
 	}
+
 }
